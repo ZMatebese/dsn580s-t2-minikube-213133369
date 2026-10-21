@@ -1,8 +1,8 @@
 # DSN580S T2: Single-Node Kubernetes with Minikube on AWS
 
-**Course:** DSN580S Distributed Systems & Software Defined Networks, CPUT
-**Student number:** 213133369
-**Lecturer:** Dr W Hendricks
+- **Course:** DSN580S Distributed Systems & Software Defined Networks, CPUT
+- **Student number:** 213133369
+- **Lecturer:** Dr W Hendricks
 
 This repository documents a single-node Kubernetes cluster built with Minikube on one Ubuntu EC2 instance in an AWS Academy Learner Lab, a three-replica nginx workload, and a Portainer dashboard reached through an SSH tunnel.
 
