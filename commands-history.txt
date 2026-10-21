@@ -1,0 +1,137 @@
+    1  echo "213133369"; date; hostname; lsb_release -d
+    2  echo "213133369"; date; hostname
+    3  docker --version
+    4  docker run hello-world
+    5  groups
+    6  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    7  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    8  kubectl version --client
+    9  curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+   10  sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+   11  minikube version
+   12  minikube start --driver=docker
+   13  echo "213133369"; date; hostname
+   14  minikube status
+   15  kubectl get nodes
+   16  clear
+   17  echo "213133369"; date; hostname; whoami
+   18  docker --version
+   19  kubectl version --client
+   20  minikube version
+   21  clear
+   22  echo "213133369"; date; hostname; whoami
+   23  minikube status
+   24  kubectl get nodes -o wide
+   25  sudo apt-get update
+   26  sudo apt-get install -y ca-certificates curl
+   27  sudo install -m 0755 -d /etc/apt/keyrings
+   28  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   29  sudo chmod a+r /etc/apt/keyrings/docker.asc
+   30  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   31  sudo apt-get update
+   32  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   33  sudo usermod -aG docker $USER
+   34  newgrp docker
+   35  minikube status
+   36  mkdir -p ~/dsn580s-minikube && cd ~/dsn580s-minikube
+   37  cat > nginx-deployment.yaml <<'EOF'
+   38  apiVersion: v1
+   39  kind: Namespace
+   40  metadata:
+   41    name: s213133369
+   42    labels:
+   43      student: "213133369"
+   44  ---
+   45  apiVersion: apps/v1
+   46  kind: Deployment
+   47  metadata:
+   48    name: nginx-213133369
+   49    namespace: s213133369
+   50    labels:
+   51      app: nginx-213133369
+   52      student: "213133369"
+   53  spec:
+   54    replicas: 3
+   55    selector:
+   56      matchLabels:
+   57        app: nginx-213133369
+   58    template:
+   59      metadata:
+   60        labels:
+   61          app: nginx-213133369
+   62          student: "213133369"
+   63      spec:
+   64        containers:
+   65        - name: nginx
+   66          image: nginx:stable
+   67          ports:
+   68          - containerPort: 80
+   69  ---
+   70  apiVersion: v1
+   71  kind: Service
+   72  metadata:
+   73    name: nginx-213133369-svc
+   74    namespace: s213133369
+   75    labels:
+   76      student: "213133369"
+   77  spec:
+   78    type: NodePort
+   79    selector:
+   80      app: nginx-213133369
+   81    ports:
+   82    - port: 80
+   83      targetPort: 80
+   84      nodePort: 30080
+   85  EOF
+   86  kubectl apply -f nginx-deployment.yaml
+   87  kubectl get all -n s213133369 -o wide
+   88  clear
+   89  echo "213133369"; date; hostname
+   90  kubectl get all -n s213133369 -o wide
+   91  curl -s http://$(minikube ip):30080 | head -n 5
+   92  clear
+   93  echo "213133369"; date; hostname
+   94  kubectl scale deployment nginx-213133369 -n s213133369 --replicas=5
+   95  kubectl get pods -n s213133369
+   96  sleep 10
+   97  kubectl get pods -n s213133369
+   98  kubectl scale deployment nginx-213133369 -n s213133369 --replicas=2
+   99  sleep 10
+  100  kubectl get pods -n s213133369
+  101  clear
+  102  kubectl scale deployment nginx-213133369 -n s213133369 --replicas=3
+  103  sleep 10
+  104  echo "213133369"; date; hostname
+  105  kubectl get pods -n s213133369
+  106  POD=$(kubectl get pods -n s213133369 -o jsonpath='{.items[0].metadata.name}')
+  107  echo "Deleting $POD"
+  108  kubectl delete pod $POD -n s213133369
+  109  kubectl get pods -n s213133369
+  110  sleep 10
+  111  kubectl get pods -n s213133369
+  112  clear
+  113  free -h
+  114  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+  115  chmod 700 get_helm.sh
+  116  ./get_helm.sh
+  117  helm version
+  118  helm repo add portainer https://portainer.github.io/k8s/
+  119  helm repo update
+  120  helm install --create-namespace -n portainer portainer portainer/portainer --set service.type=NodePort
+  121  kubectl get pods,svc -n portainer
+  122  kubectl get pods -n portainer
+  123  mkdir -p ~/dsn580s-minikube && cd ~/dsn580s-minikube
+  124  clear
+  125  kubectl logs -n portainer deployment/portainer | grep -i token
+  126  kubectl rollout restart deployment portainer -n portainer
+  127  kubectl rollout status deployment portainer -n portainer
+  128  kubectl logs -n portainer deployment/portainer | grep -i token
+  129  echo "213133369"; date; hostname
+  130  clear
+  131  echo "213133369"; date; hostname
+  132  helm list -n portainer
+  133  kubectl get pods,svc -n portainer
+  134  clear
+  135  exit
+  136  cd ~/dsn580s-minikube
+  137  history > commands-history.txt
